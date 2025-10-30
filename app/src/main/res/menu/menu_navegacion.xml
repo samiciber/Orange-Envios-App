@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="@drawable/outline_flight_takeoff_24"  android:title="Realizar envios" />
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/outline_person_24"          android:title="Perfil" />
+    <item
+        android:id="@+id/nav_config"
+        android:icon="@drawable/outline_settings_24"         android:title="Config" />
+</menu>

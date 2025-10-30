@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gestion.RecipientFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title_recipient"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¿Quién recibirá el envío?"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/illustration_recipient"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/toggle_group_recipient"
+            android:contentDescription="Package illustration" />
+
+        <LinearLayout
+            android:id="@+id/toggle_group_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/illustration_recipient">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DNI"
+                android:textStyle="bold" />
+
+            <Switch
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:checked="true"
+                android:thumbTint="@android:color/holo_red_dark"
+                android:trackTint="@android:color/holo_red_light"
+                android:layout_marginStart="8dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="RUC"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
+
+            <Switch
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:checked="false"
+                android:layout_marginStart="8dp"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CE"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp" />
+
+            <Switch
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:checked="false"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_dni_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="DNI"
+            android:inputType="number"
+            android:drawableEnd="@android:drawable/ic_menu_close_clear_cancel"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/toggle_group_recipient" />
+
+        <EditText
+            android:id="@+id/et_name_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Nombres"
+            android:inputType="textPersonName"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/et_dni_recipient" />
+
+        <LinearLayout
+            android:id="@+id/layout_surnames_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/et_name_recipient">
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="Apellido Paterno"
+                android:layout_marginEnd="4dp"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:hint="Apellido Materno"
+                android:layout_marginStart="4dp"
+                android:inputType="textPersonName" />
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/et_phone_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/layout_surnames_recipient" />
+
+        <Button
+            android:id="@+id/btn_register_recipient"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registrar destinatario"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="32dp"
+            app:layout_constraintTop_toBottomOf="@id/et_phone_recipient" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

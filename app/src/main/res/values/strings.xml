@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">logistiq</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="select_tipo_envio">Seleccione el Tipo de Envío</string>
+    <string name="select_punto_origen">Seleccione el Punto de Origen</string>
+    <string name="select_punto_destino">Seleccione el Punto de Llegada</string>
+
+    <string-array name="tipos_envio_array">
+        <item>Envío Estándar</item>
+        <item>Envío Express</item>
+        <item>Recojo en Agencia</item>
+    </string-array>
+
+    <string-array name="puntos_origen_array">
+        <item>Canto Grande</item>
+        <item>La Victoria</item>
+        <item>Surco</item>
+    </string-array>
+
+    <string-array name="puntos_destino_array">
+        <item>Av Mexico Co</item>
+        <item>San Juan de Lurigancho</item>
+        <item>Comas</item>
+    </string-array>
+</resources>

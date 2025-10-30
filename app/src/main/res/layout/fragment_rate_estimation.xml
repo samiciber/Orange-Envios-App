@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".gestion.RateEstimationFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/title_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Estimación de la Tarifa"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/black"
+            android:layout_marginTop="24dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/illustration_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:scaleType="fitEnd"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/spinner_envio_tipo"
+            android:contentDescription="Package and percent illustration" />
+
+        <Spinner
+            android:id="@+id/spinner_envio_tipo"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:entries="@array/tipos_envio_array" android:prompt="@string/select_tipo_envio"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/illustration_rate" />
+
+        <TextView
+            android:id="@+id/label_tipo_envio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Tipo de Envío"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/spinner_envio_tipo"
+            android:layout_marginTop="-16dp"
+            android:layout_marginStart="4dp"/>
+
+        <LinearLayout
+            android:id="@+id/package_info_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner_envio_tipo">
+
+            <ImageView
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/outline_deployed_code_24"
+                android:contentDescription="Box Icon" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Caja Paquete XXS (15 x 10 x 10 cm)\nPeso máx. 250 gr"
+                android:layout_marginStart="16dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <Button
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="—"
+                    android:padding="0dp"
+                    android:textColor="@android:color/black"
+                    android:background="@android:color/transparent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textStyle="bold"
+                    android:paddingStart="4dp"
+                    android:paddingEnd="4dp" />
+
+                <Button
+                    android:layout_width="48dp"
+                    android:layout_height="48dp"
+                    android:text="+"
+                    android:padding="0dp"
+                    android:textColor="@android:color/black"
+                    android:background="@android:color/transparent" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/divider1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/package_info_layout" />
+
+        <ImageView
+            android:id="@+id/location_icon_start"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/baseline_location_on_24"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider1"
+            app:layout_constraintStart_toStartOf="parent"
+            android:contentDescription="Location Pin Start" />
+
+        <Spinner
+            android:id="@+id/spinner_origen"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:entries="@array/puntos_origen_array"
+            android:prompt="@string/select_punto_origen"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/location_icon_start"
+            app:layout_constraintEnd_toStartOf="@id/route_line_indicator"
+            app:layout_constraintTop_toTopOf="@id/location_icon_start" />
+
+        <TextView
+            android:id="@+id/label_origen"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Punto de Origen"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="@id/spinner_origen"
+            app:layout_constraintTop_toTopOf="@id/spinner_origen"
+            android:layout_marginTop="-16dp"
+            android:layout_marginStart="4dp"/>
+
+        <Spinner
+            android:id="@+id/spinner_destino"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:entries="@array/puntos_destino_array" android:prompt="@string/select_punto_destino"
+            style="@style/Widget.AppCompat.Spinner.Underlined"
+            android:layout_marginTop="32dp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@id/location_icon_start"
+            app:layout_constraintEnd_toStartOf="@id/route_line_indicator"
+            app:layout_constraintTop_toBottomOf="@id/spinner_origen" />
+
+        <TextView
+            android:id="@+id/label_destino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Punto de Llegada"
+            android:textSize="12sp"
+            android:textColor="@android:color/darker_gray"
+            app:layout_constraintStart_toStartOf="@id/spinner_destino"
+            app:layout_constraintTop_toTopOf="@id/spinner_destino"
+            android:layout_marginTop="-16dp"
+            android:layout_marginStart="4dp"/>
+
+        <LinearLayout
+            android:id="@+id/route_line_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/spinner_origen"
+            app:layout_constraintBottom_toBottomOf="@id/spinner_destino"
+            android:layout_marginEnd="8dp">
+
+            <View
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:background="@drawable/outline_adjust_24" /> <View
+            android:layout_width="2dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/holo_red_dark"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp" /> <View
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:background="@drawable/outline_adjust_24" /> </LinearLayout>
+
+        <View
+            android:id="@+id/divider2"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@android:color/darker_gray"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/spinner_destino" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/divider2">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S/"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/holo_red_dark" />
+
+            <Space
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <TextView
+                android:id="@+id/rate_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="S/ 8.00"
+                android:textSize="32sp"
+                android:textStyle="bold"
+                android:textColor="@android:color/black" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/btn_continue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continuar"
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
