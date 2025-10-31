@@ -23,4 +23,15 @@
         <item>San Juan de Lurigancho</item>
         <item>Comas</item>
     </string-array>
+    <string name="search_hint">Ingresa la calle, ciudad o distrito</string>
+    <string name="agencies">Agencias</string>
+    <string name="pro_points">Puntos PRO</string>
+    <string name="search_icon_desc">Search Icon</string>
+    <string name="clear_icon_desc">Clear Icon</string>
+    <string name="main_image_desc">Main Image</string>
+    <string name="places_sdk_not_initialized">Error: La API de Google Places no se ha configurado.</string>
+    <string name="puntos_pro">Puntos PRO</string>
+    <string name="back_button_description">Back button</string>
+    <string name="mas_operaciones">Más Operaciones</string>
+    <string name="operation_icon_description">Operation icon</string>
 </resources>

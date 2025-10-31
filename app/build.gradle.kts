@@ -16,6 +16,15 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField(
+            "String",
+            "GEMINI_API_KEY",
+            "\"${System.getenv("GEMINI_API_KEY")}\""
+        )
+    }
+    buildFeatures {
+        viewBinding = true
+        buildConfig = true
     }
 
     buildTypes {
@@ -44,10 +53,14 @@ dependencies {
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.generativeai)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation(platform("com.google.firebase:firebase-bom:34.3.0"))
     implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-auth")
+    implementation("com.google.android.gms:play-services-maps:18.2.0")
+    implementation("com.google.android.libraries.places:places:3.4.0")
+    implementation("com.google.ai.client.generativeai:generativeai:0.8.0")
 }

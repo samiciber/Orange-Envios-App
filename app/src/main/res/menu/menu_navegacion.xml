@@ -2,11 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/nav_inicio"
-        android:icon="@drawable/outline_flight_takeoff_24"  android:title="Realizar envios" />
+        android:icon="@drawable/outline_flight_takeoff_24"  android:title="Envía ya" />
     <item
         android:id="@+id/nav_perfil"
         android:icon="@drawable/outline_person_24"          android:title="Perfil" />
     <item
+        android:id="@+id/nav_operaci"
+        android:icon="@drawable/outline_deployed_code_24"         android:title="Operaciones" />
+    <item
         android:id="@+id/nav_config"
-        android:icon="@drawable/outline_settings_24"         android:title="Config" />
+        android:icon="@drawable/baseline_location_on_24"         android:title="Agencias" />
 </menu>

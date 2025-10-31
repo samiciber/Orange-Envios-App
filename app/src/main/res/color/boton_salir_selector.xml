@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Cuando el botón esté presionado -->
     <item android:color="#FFCDD2" android:state_pressed="true" />
-
-    <!-- Fondo por defecto -->
-    <item android:color="@color/white" />
+    <!-- Cuando el puntero del mouse esté sobre el botón -->
+    <item android:color="#FFE0E0" android:state_hovered="true" />
+    <!-- Estado por defecto -->
+    <item android:color="#FFFFFF" />
 
 </selector>
