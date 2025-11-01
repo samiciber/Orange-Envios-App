@@ -6,14 +6,17 @@ import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.logistiq.R
-import com.example.logistiq.models.PersonData  // ← IMPORTA ESTE
+import com.example.logistiq.models.PersonData
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.firestore.FirebaseFirestore  // ← IMPORTA ESTE
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 
 abstract class BaseFormFragment : Fragment() {
-    private val db = FirebaseFirestore.getInstance()  // ← INSTANCIA DE FIRESTORE
+    private val database = FirebaseDatabase.getInstance().reference  // ← Realtime DB Reference
     private val TAG = "BaseFormFragment"
 
     // Views (IDs unificados)
@@ -75,13 +78,13 @@ abstract class BaseFormFragment : Fragment() {
     }
 
     private fun setupClearIcons() {
-        // Material ya maneja el clear_text
+        // Material maneja clear_text automáticamente
     }
 
     private fun setupButton() {
         btnRegister.setOnClickListener {
             if (validateForm()) {
-                saveToFirebase()  // ← NUEVA FUNCIÓN: ENVÍA A FIREBASE
+                saveToRealtimeDB()  // ← FUNCIÓN CORREGIDA PARA REALTIME DB
             } else {
                 Toast.makeText(requireContext(), "Completa todos los campos correctamente", Toast.LENGTH_SHORT).show()
             }
@@ -89,48 +92,51 @@ abstract class BaseFormFragment : Fragment() {
     }
 
     private fun validateForm(): Boolean {
-        return etDni.text?.isNotBlank() == true &&
-                etName.text?.isNotBlank() == true &&
-                etPaterno.text?.isNotBlank() == true &&
-                etMaterno.text?.isNotBlank() == true &&
-                etPhone.text?.toString()?.length!! >= 9
+        val phoneStr = etPhone.text.toString().trim()
+        return etDni.text.toString().trim().isNotEmpty() &&
+                etName.text.toString().trim().isNotEmpty() &&
+                etPaterno.text.toString().trim().isNotEmpty() &&
+                etMaterno.text.toString().trim().isNotEmpty() &&
+                phoneStr.isNotEmpty() && phoneStr.length >= 9
     }
 
-    // ← NUEVA FUNCIÓN: GUARDA EN FIREBASE
-    private fun saveToFirebase() {
+    // ← FUNCIÓN CORREGIDA: GUARDA EN REALTIME DATABASE
+    private fun saveToRealtimeDB() {
+        // DETERMINAR TIPO CORRECTAMENTE (usando switches, no hint)
         val documentType = when {
             switchDni.isChecked -> "DNI"
             switchRuc.isChecked -> "RUC"
-            else -> "CE"
+            switchCe.isChecked -> "CE"
+            else -> "DNI" // fallback
         }
 
+        // TOMAR EL VALOR DEL CAMPO DNI/RUC/CE (el mismo campo)
+        val documentValue = etDni.text.toString().trim()
+
         val personData = PersonData(
-            dni = etDni.text.toString().trim(),
+            dni = documentValue,           // Aquí va el número (DNI, RUC, CE)
             name = etName.text.toString().trim(),
             paterno = etPaterno.text.toString().trim(),
             materno = etMaterno.text.toString().trim(),
             phone = etPhone.text.toString().trim(),
-            type = documentType,
-            isSender = this is SenderFragment  // Distingue remitente/destinatario
+            type = documentType,           // Aquí va el TIPO: "DNI", "RUC", "CE"
+            isSender = this is SenderFragment
         )
 
-        // Colección "personas" en Firestore
-        val collectionRef = if (personData.isSender) {
-            db.collection("senders")  // Para remitentes
+        val ref = if (personData.isSender) {
+            database.child("senders").push()
         } else {
-            db.collection("recipients")  // Para destinatarios
+            database.child("recipients").push()
         }
 
-        collectionRef.add(personData)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "Documento agregado con ID: ${documentReference.id}")
-                Toast.makeText(requireContext(), "¡Datos enviados a Firebase exitosamente!", Toast.LENGTH_SHORT).show()
+        ref.setValue(personData.toMap())
+            .addOnSuccessListener {
+                Log.d(TAG, "Datos guardados correctamente")
+                Toast.makeText(requireContext(), "¡Registrado exitosamente!", Toast.LENGTH_SHORT).show()
                 clearForm()
-                // Opcional: Navega a siguiente pantalla
-                // findNavController().navigate(R.id.action_to_next_fragment)
             }
             .addOnFailureListener { e ->
-                Log.w(TAG, "Error al agregar documento", e)
+                Log.e(TAG, "Error al guardar", e)
                 Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
@@ -142,5 +148,7 @@ abstract class BaseFormFragment : Fragment() {
         etMaterno.text?.clear()
         etPhone.text?.clear()
         switchDni.isChecked = true  // Reset a DNI
+        switchRuc.isChecked = false
+        switchCe.isChecked = false
     }
 }
