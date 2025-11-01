@@ -14,9 +14,10 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
+import com.google.firebase.database.DatabaseReference
 
 abstract class BaseFormFragment : Fragment() {
-    private val database = FirebaseDatabase.getInstance().reference  // ← Realtime DB Reference
+    protected val database: DatabaseReference = FirebaseDatabase.getInstance().reference  // ← Realtime DB Reference
     private val TAG = "BaseFormFragment"
 
     // Views (IDs unificados)
@@ -100,15 +101,19 @@ abstract class BaseFormFragment : Fragment() {
                 phoneStr.isNotEmpty() && phoneStr.length >= 9
     }
 
-    // ← FUNCIÓN CORREGIDA: GUARDA EN REALTIME DATABASE
-    private fun saveToRealtimeDB() {
-        // DETERMINAR TIPO CORRECTAMENTE (usando switches, no hint)
-        val documentType = when {
+    protected open fun getDocumentType(): String {
+        return when {
             switchDni.isChecked -> "DNI"
             switchRuc.isChecked -> "RUC"
             switchCe.isChecked -> "CE"
             else -> "DNI" // fallback
         }
+    }
+
+    // ← FUNCIÓN CORREGIDA: GUARDA EN REALTIME DATABASE
+    open fun saveToRealtimeDB() {
+        // DETERMINAR TIPO CORRECTAMENTE (usando switches, no hint)
+        val documentType = getDocumentType()
 
         // TOMAR EL VALOR DEL CAMPO DNI/RUC/CE (el mismo campo)
         val documentValue = etDni.text.toString().trim()
@@ -141,7 +146,7 @@ abstract class BaseFormFragment : Fragment() {
             }
     }
 
-    private fun clearForm() {
+    protected fun clearForm() {
         etDni.text?.clear()
         etName.text?.clear()
         etPaterno.text?.clear()

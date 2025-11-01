@@ -52,7 +52,7 @@ class RateEstimationFragment : Fragment() {
             val nextFragment = PasswordFragment()
 
             parentFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container, nextFragment)
+                .replace(R.id.nav_host_fragment, nextFragment)
                 .addToBackStack(null)
                 .commit()
         }

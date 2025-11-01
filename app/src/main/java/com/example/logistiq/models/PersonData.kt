@@ -3,17 +3,17 @@ package com.example.logistiq.models
 import com.google.firebase.database.PropertyName
 import com.google.firebase.database.Exclude
 data class PersonData(
-    @PropertyName("dni") val dni: String = "",
-    @PropertyName("name") val name: String = "",
-    @PropertyName("paterno") val paterno: String = "",
-    @PropertyName("materno") val materno: String = "",
-    @PropertyName("phone") val phone: String = "",
-    @PropertyName("type") val type: String = "DNI",
-    @PropertyName("createdAt") val createdAt: Long = System.currentTimeMillis(),
-    @PropertyName("isSender") val isSender: Boolean = false
+    val dni: String = "",
+    val name: String = "",
+    val paterno: String = "",
+    val materno: String = "",
+    val phone: String = "",
+    val type: String = "DNI",
+    val createdAt: Long = System.currentTimeMillis(),
+    val isSender: Boolean = false,
+    val senderId: String? = null  // ← NUEVO: referencia al remitente
 ) {
-    // Constructor vacío para Firebase
-    constructor() : this("", "", "", "", "", "DNI", System.currentTimeMillis(), false)
+    constructor() : this("", "", "", "", "", "DNI", 0, false, null)
 
     @Exclude
     fun toMap(): Map<String, Any?> {
@@ -25,7 +25,8 @@ data class PersonData(
             "phone" to phone,
             "type" to type,
             "createdAt" to createdAt,
-            "isSender" to isSender
+            "isSender" to isSender,
+            "senderId" to senderId
         )
     }
 }
