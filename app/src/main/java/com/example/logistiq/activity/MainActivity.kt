@@ -28,9 +28,6 @@ class MainActivity : AppCompatActivity() {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        // Conectar BottomNavigation con NavController
-        bottomNav.setupWithNavController(navController)
-
         // DATOS DE LOGIN
         val correo = intent.getStringExtra("Correo")
         val proveedor = intent.getStringExtra("Proveedor")
@@ -41,14 +38,17 @@ class MainActivity : AppCompatActivity() {
                 putString("Correo", correo)
                 putString("Proveedor", proveedor)
             }
-            navController.navigate(R.id.bienvenida_fragment, bundle)
+            navController.navigate(R.id.bienvenidaFragment, bundle)
         }
 
-        // ESCUCHAR CLICS EN BOTTOM NAVIGATION
+        // ELIMINAR setupWithNavController() → CONFLICTO
+        // bottomNav.setupWithNavController(navController)  // BORRAR ESTA LÍNEA
+
+        // ESCUCHAR CLICS MANUALMENTE (CORREGIDO)
         bottomNav.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.nav_inicio -> {
-                    navController.navigate(R.id.senderFragment)
+                    navController.navigate(R.id.tipoProductoFragment)
                     true
                 }
                 R.id.nav_perfil -> {
@@ -60,10 +60,12 @@ class MainActivity : AppCompatActivity() {
                     true
                 }
                 R.id.nav_operaci -> {
+                    // Opción 1: Abrir Activity (rompe backstack)
                     startActivity(Intent(this, OperacionesActivity::class.java))
                     true
                 }
                 R.id.nav_config -> {
+                    // Opción 1: Abrir Activity
                     startActivity(Intent(this, MapsActivity::class.java))
                     true
                 }
@@ -72,7 +74,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // Soporte para el botón "Atrás"
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }

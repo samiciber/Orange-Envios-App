@@ -11,22 +11,22 @@ data class PersonData(
     val type: String = "DNI",
     val createdAt: Long = System.currentTimeMillis(),
     val isSender: Boolean = false,
-    val senderId: String? = null  // ← NUEVO: referencia al remitente
+    val senderId: String? = null,
+    val productType: String = "sobre",
+    val price: Int = 8
 ) {
-    constructor() : this("", "", "", "", "", "DNI", 0, false, null)
-
     @Exclude
-    fun toMap(): Map<String, Any?> {
-        return mapOf(
-            "dni" to dni,
-            "name" to name,
-            "paterno" to paterno,
-            "materno" to materno,
-            "phone" to phone,
-            "type" to type,
-            "createdAt" to createdAt,
-            "isSender" to isSender,
-            "senderId" to senderId
-        )
-    }
+    fun toMap(): Map<String, Any?> = mapOf(
+        "dni" to dni,
+        "name" to name,
+        "paterno" to paterno,
+        "materno" to materno,
+        "phone" to phone,
+        "type" to type,
+        "createdAt" to createdAt,
+        "isSender" to isSender,
+        "senderId" to senderId,
+        "productType" to productType,
+        "price" to price
+    )
 }

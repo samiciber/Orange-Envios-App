@@ -233,7 +233,7 @@
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrar remitente"
+                android:text="Registrar destinatario"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textAllCaps="false"
