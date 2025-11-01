@@ -24,9 +24,9 @@
               <option name="connection">
                 <ConnectionSetting>
                   <option name="appId" value="com.example.logistiq" />
-                  <option name="mobileSdkAppId" value="1:1092542982139:android:c9567768bd8b964bda8d5e" />
-                  <option name="projectId" value="logitiq-42ee0" />
-                  <option name="projectNumber" value="1092542982139" />
+                  <option name="mobileSdkAppId" value="1:830316137555:android:952197e79b1282ba1d0aa6" />
+                  <option name="projectId" value="logistiq-476716" />
+                  <option name="projectNumber" value="830316137555" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

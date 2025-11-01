@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "1092542982139",
-    "project_id": "logitiq-42ee0",
-    "storage_bucket": "logitiq-42ee0.firebasestorage.app"
+    "project_number": "830316137555",
+    "project_id": "logistiq-476716",
+    "storage_bucket": "logistiq-476716.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1092542982139:android:c9567768bd8b964bda8d5e",
+        "mobilesdk_app_id": "1:830316137555:android:952197e79b1282ba1d0aa6",
         "android_client_info": {
           "package_name": "com.example.logistiq"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBNiUFuHDnsgXKrRpB9GnKxvb3JyEAuTA4"
+          "current_key": "AIzaSyAqkJkG2aM6Dfzy6k5WzkRWGPk6tQanuS0"
         }
       ],
       "services": {

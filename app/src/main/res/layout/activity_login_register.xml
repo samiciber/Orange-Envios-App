@@ -5,7 +5,7 @@
     android:id="@+id/dialogo_cuenta"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:context=".DialogoCrearCuenta">
+    tools:context=".activity.RegistrarActivity">
 
     <LinearLayout
         android:layout_width="match_parent"

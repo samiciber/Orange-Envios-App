@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:name=".MyApplication"
@@ -20,10 +21,10 @@
             android:value="AIzaSyBnUJuy5n9X4PO1cm1esj6yjTzyWMdGomg" />
 
         <activity
-            android:name=".Bienvenida"
+            android:name=".activity.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".activity.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -32,7 +33,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MapsActivity"
+            android:name=".activity.MapsActivity"
             android:exported="false" />
         <activity
             android:name=".operaciones.OperacionesActivity"

@@ -1,4 +1,4 @@
-package com.example.logistiq
+package com.example.logistiq.activity
 
 import android.content.Intent
 import android.graphics.Color
@@ -12,14 +12,15 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
+import com.example.logistiq.R
 import com.google.firebase.auth.FirebaseAuth
 
-class DialogoCrearCuenta : DialogFragment() {
+class RegistrarActivity : DialogFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        var view:View=inflater.inflate(R.layout.fragment_dialogo_crear_cuenta, container, false)
+        var view: View =inflater.inflate(R.layout.activity_login_register, container, false)
 
         var correo=view.findViewById<EditText>(R.id.edittext_correo)
         var pass=view.findViewById<EditText>(R.id.edittext_pass)
@@ -31,11 +32,11 @@ class DialogoCrearCuenta : DialogFragment() {
                     crear_cuenta_firebase(correo.text.toString(),pass.text.toString())
                 }
                 else{
-                    Toast.makeText(requireContext(),"Formato de correo incorrecto.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Formato de correo incorrecto.", Toast.LENGTH_LONG).show()
                 }
             }
             else{
-                Toast.makeText(requireContext(),"Escriba la contraseña",Toast.LENGTH_LONG).show()
+                Toast.makeText(requireContext(),"Escriba la contraseña", Toast.LENGTH_LONG).show()
             }
         }
 
@@ -48,17 +49,17 @@ class DialogoCrearCuenta : DialogFragment() {
         FirebaseAuth.getInstance().createUserWithEmailAndPassword(correo, pass)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    var intent = Intent(requireContext(),Bienvenida::class.java)
+                    var intent = Intent(requireContext(), MainActivity::class.java)
                     intent.putExtra("Correo",task.result.user?.email)
                     intent.putExtra("Proveedor","Usuario/contraseña")
                     startActivity(intent)
 
-                    var guardar_sesion:MainActivity=activity as MainActivity
+                    var guardar_sesion: LoginActivity =activity as LoginActivity
                     guardar_sesion.guardar_sesion(task.result.user?.email.toString(),"Usuario/contraseña")
 
-                    Toast.makeText(requireContext(),"Cuenta creada.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Cuenta creada.", Toast.LENGTH_LONG).show()
                 } else {
-                    Toast.makeText(requireContext(),"Contraseña corta/usuario existente.",Toast.LENGTH_LONG).show()
+                    Toast.makeText(requireContext(),"Contraseña corta/usuario existente.", Toast.LENGTH_LONG).show()
                 }
             }
     }

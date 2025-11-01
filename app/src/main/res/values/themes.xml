@@ -24,6 +24,4 @@
         <item name="android:text">""</item>
     </style>
 
-    <color name="light_blue_bg">#E0F7FA</color>
-    <color name="red">#FF0000</color>
 </resources>
