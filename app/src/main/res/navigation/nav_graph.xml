@@ -2,8 +2,15 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/senderFragment">
+    app:startDestination="@id/bienvenidaFragment">
 
+    <!-- BIENVENIDA (PANTALLA INICIAL) -->
+    <fragment
+        android:id="@+id/bienvenidaFragment"
+        android:name="com.example.logistiq.fragments.BienvenidaFragment"
+        android:label="Bienvenida" />
+
+    <!-- REMITENTE -->
     <fragment
         android:id="@+id/senderFragment"
         android:name="com.example.logistiq.gestion.SenderFragment"
@@ -13,6 +20,7 @@
             app:destination="@id/recipientFragment" />
     </fragment>
 
+    <!-- DESTINATARIO -->
     <fragment
         android:id="@+id/recipientFragment"
         android:name="com.example.logistiq.gestion.RecipientFragment"

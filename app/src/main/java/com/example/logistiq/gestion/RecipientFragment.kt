@@ -11,12 +11,15 @@ import com.example.logistiq.models.PersonData
 class RecipientFragment : BaseFormFragment() {
     private var senderKey: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        senderKey = arguments?.getString("senderKey")  // ← MEJOR AQUÍ
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Recuperar el ID del remitente desde argumentos
-        senderKey = arguments?.getString("senderKey")
         return inflater.inflate(R.layout.fragment_destinatario, container, false)
     }
 
@@ -32,19 +35,19 @@ class RecipientFragment : BaseFormFragment() {
             phone = etPhone.text.toString().trim(),
             type = documentType,
             isSender = false,
-            senderId = senderKey  // ← Relaciona con el remitente
+            senderId = senderKey  // ← Perfecto
         )
 
         val ref = database.child("recipients").push()
 
         ref.setValue(personData.toMap())
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "Destinatario guardado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "¡Destinatario guardado con éxito!", Toast.LENGTH_SHORT).show()
                 clearForm()
-                // Opcional: ir a pantalla de envío
+                // ¡ENVÍO COMPLETO! Puedes ir a "Resumen de Envío"
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al guardar destinatario", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
 }

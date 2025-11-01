@@ -11,8 +11,6 @@ import com.example.logistiq.models.PersonData
 import com.google.firebase.database.FirebaseDatabase
 
 class SenderFragment : BaseFormFragment() {
-    private var senderKey: String? = null  // ← Guarda el ID del remitente
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,25 +33,24 @@ class SenderFragment : BaseFormFragment() {
         )
 
         val ref = database.child("senders").push()
-        senderKey = ref.key  // ← Guarda el ID para el destinatario
+        val senderKey = ref.key ?: return
 
         ref.setValue(personData.toMap())
             .addOnSuccessListener {
                 Toast.makeText(requireContext(), "Remitente guardado", Toast.LENGTH_SHORT).show()
                 clearForm()
-                // Pasar al siguiente fragment
-                // AHORA (con Bundle para pasar el ID)
+
+                // NAVEGACIÓN CON NAVIGATION COMPONENT
                 val bundle = Bundle().apply {
                     putString("senderKey", senderKey)
                 }
-                findNavController().navigate(R.id.action_sender_to_recipient, bundle)
+                findNavController().navigate(
+                    R.id.action_sender_to_recipient,
+                    bundle
+                )
             }
-            .addOnFailureListener {
-                Toast.makeText(requireContext(), "Error al guardar remitente", Toast.LENGTH_SHORT).show()
+            .addOnFailureListener { e ->
+                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
             }
     }
-
-    // Método para pasar el ID al destinatario
-    fun getSenderKey(): String? = senderKey
-
 }
