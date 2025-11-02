@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- res/drawable/ic_tarifa.xml -->
+    <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="200dp"
+        android:height="150dp"
+        android:viewportWidth="200"
+        android:viewportHeight="150">
+
+        <!-- Mano -->
+        <path
+            android:fillColor="#42A5F5"
+            android:pathData="M90,50c-5,0 -10,5 -10,10v40c0,5 5,10 10,10h10v-60z"/>
+        <path
+            android:fillColor="#1E88E5"
+            android:pathData="M110,50c-5,0 -10,5 -10,10v30c0,5 5,10 10,10h10v-50z"/>
+        <path
+            android:fillColor="#1976D2"
+            android:pathData="M130,55c-5,0 -10,5 -10,10v25c0,5 5,10 10,10h10v-45z"/>
+
+        <!-- Moneda -->
+        <path
+            android:fillColor="#FFCA28"
+            android:pathData="M100,100c-11,0 -20,9 -20,20c0,11 9,20 20,20s20,-9 20,-20c0,-11 -9,-20 -20,-20z"/>
+        <path
+            android:fillColor="#FFB300"
+            android:pathData="M100,105c-8,0 -15,7 -15,15c0,8 7,15 15,15s15,-7 15,-15c0,-8 -7,-15 -15,-15z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M95,115h10v5h-10z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M97.5,112.5h5v10h-5z"/>
+    </vector>
+
+</selector>

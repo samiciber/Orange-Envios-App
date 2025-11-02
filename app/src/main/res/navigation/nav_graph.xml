@@ -1,48 +1,181 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/bienvenidaFragment">
+    app:startDestination="@id/tipoProductoFragment">
 
-    <!-- BIENVENIDA -->
-    <fragment
-        android:id="@+id/bienvenidaFragment"
-        android:name="com.example.logistiq.fragments.BienvenidaFragment"
-        android:label="Bienvenida" />
+    <!-- ACCIONES GLOBALES -->
+    <action
+        android:id="@+id/action_global_bienvenidaFragment"
+        app:destination="@id/bienvenidaFragment" />
 
-    <!-- TIPO DE PRODUCTO -->
+    <action
+        android:id="@+id/action_global_tipoProductoFragment"
+        app:destination="@id/tipoProductoFragment" />
+
+    <!-- 1. TIPO PRODUCTO -->
     <fragment
         android:id="@+id/tipoProductoFragment"
         android:name="com.example.logistiq.gestion.TipoProductoFragment"
-        android:label="Tipo de Producto">
-
+        android:label="Tipo de Producto"
+        tools:layout="@layout/fragment_tipo_producto">
         <action
-            android:id="@+id/action_tipoProducto_to_sender"
-            app:destination="@id/senderFragment" />
+            android:id="@+id/action_fragmentTipoProducto_to_fragmentSeleccionUbicacion"
+            app:destination="@id/fragmentSeleccionUbicacion">
+            <argument
+                android:name="productType"
+                app:argType="string"
+                android:defaultValue="sobre" />
+        </action>
     </fragment>
 
-    <!-- REMITENTE -->
+    <!-- 2. SELECCIÓN UBICACIÓN -->
+    <fragment
+        android:id="@+id/fragmentSeleccionUbicacion"
+        android:name="com.example.logistiq.gestion.FragmentSeleccionUbicacion"
+        android:label="Seleccionar Ubicación"
+        tools:layout="@layout/fragment_seleccion_ubicacion">
+        <argument
+            android:name="productType"
+            app:argType="string"
+            android:defaultValue="sobre" />
+        <action
+            android:id="@+id/action_seleccionUbicacion_to_resumenTarifa"
+            app:destination="@id/fragmentResumenTarifa">
+            <argument android:name="origen" app:argType="string" />
+            <argument android:name="destino" app:argType="string" />
+            <argument android:name="destinoNombre" app:argType="string" />
+            <argument android:name="productType" app:argType="string" />
+            <argument android:name="origenNombre" app:argType="string" />
+        </action>
+    </fragment>
+
+    <!-- 3. RESUMEN TARIFA -->
+    <fragment
+        android:id="@+id/fragmentResumenTarifa"
+        android:name="com.example.logistiq.gestion.FragmentResumenTarifa"
+        android:label="Resumen"
+        tools:layout="@layout/fragment_resumen_tarifa">
+        <argument android:name="origen" app:argType="string" />
+        <argument android:name="destino" app:argType="string" />
+        <argument android:name="destinoNombre" app:argType="string" />
+        <argument android:name="productType" app:argType="string" android:defaultValue="sobre" />
+        <argument android:name="origenNombre" app:argType="string" android:defaultValue="" />
+        <action
+            android:id="@+id/action_resumenTarifa_to_sender"
+            app:destination="@id/senderFragment">
+            <argument android:name="productType" app:argType="string" />
+            <argument android:name="price" app:argType="integer" />
+            <argument android:name="origenNombre" app:argType="string" />
+            <argument android:name="destinoNombre" app:argType="string" />
+        </action>
+    </fragment>
+
+    <!-- 4. REMITENTE -->
     <fragment
         android:id="@+id/senderFragment"
         android:name="com.example.logistiq.gestion.SenderFragment"
-        android:label="Remitente">
-
+        android:label="Remitente"
+        tools:layout="@layout/fragment_remitente">
+        <argument android:name="productType" app:argType="string" android:defaultValue="sobre" />
+        <argument android:name="price" app:argType="integer" android:defaultValue="8" />
+        <argument android:name="origenNombre" app:argType="string" android:defaultValue="" />
+        <argument android:name="destinoNombre" app:argType="string" android:defaultValue="" />
         <action
             android:id="@+id/action_sender_to_recipient"
-            app:destination="@id/recipientFragment" />
+            app:destination="@id/recipientFragment">
+            <argument android:name="senderKey" app:argType="string" />
+            <argument android:name="productType" app:argType="string" />
+            <argument android:name="price" app:argType="integer" />
+            <argument android:name="origenNombre" app:argType="string" />
+            <argument android:name="destinoNombre" app:argType="string" />
+        </action>
     </fragment>
 
-    <!-- DESTINATARIO -->
+    <!-- 5. DESTINATARIO -->
     <fragment
         android:id="@+id/recipientFragment"
         android:name="com.example.logistiq.gestion.RecipientFragment"
-        android:label="Destinatario">
-
+        android:label="Destinatario"
+        tools:layout="@layout/fragment_destinatario">
+        <argument android:name="senderKey" app:argType="string" />
+        <argument android:name="productType" app:argType="string" android:defaultValue="sobre" />
+        <argument android:name="price" app:argType="integer" android:defaultValue="8" />
+        <argument android:name="origenNombre" app:argType="string" android:defaultValue="" />
+        <argument android:name="destinoNombre" app:argType="string" android:defaultValue="" />
         <action
-            android:id="@+id/action_recipient_to_inicio"
+            android:id="@+id/action_recipient_to_securityPin"
+            app:destination="@id/securityPinFragment">
+            <argument android:name="senderKey" app:argType="string" />
+            <argument android:name="recipientKey" app:argType="string" />
+            <argument android:name="productType" app:argType="string" />
+            <argument android:name="price" app:argType="integer" />
+            <argument android:name="origen" app:argType="string" />
+            <argument android:name="destino" app:argType="string" />
+        </action>
+    </fragment>
+
+    <!-- 6. CLAVE DE SEGURIDAD -->
+    <fragment
+        android:id="@+id/securityPinFragment"
+        android:name="com.example.logistiq.gestion.SecurityPinFragment"
+        android:label="Clave de Seguridad"
+        tools:layout="@layout/fragment_security_pin">
+        <argument android:name="senderKey" app:argType="string" />
+        <argument android:name="recipientKey" app:argType="string" />
+        <argument android:name="productType" app:argType="string" />
+        <argument android:name="price" app:argType="integer" />
+        <argument android:name="origen" app:argType="string" />
+        <argument android:name="destino" app:argType="string" />
+        <action
+            android:id="@+id/action_securityPin_to_thanks"
+            app:destination="@id/thanksFragment">
+            <argument android:name="orderCode" app:argType="string" />
+        </action>
+    </fragment>
+
+    <!-- 7. GRACIAS -->
+    <fragment
+        android:id="@+id/thanksFragment"
+        android:name="com.example.logistiq.gestion.ThanksFragment"
+        android:label="Gracias"
+        tools:layout="@layout/fragment_thanks">
+        <argument android:name="orderCode" app:argType="string" />
+        <action
+            android:id="@+id/action_thanks_to_detail"
+            app:destination="@id/detailFragment">
+            <argument android:name="orderCode" app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_thanks_to_tipoProducto"
             app:destination="@id/tipoProductoFragment"
             app:popUpTo="@id/tipoProductoFragment"
             app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- 8. DETALLE -->
+    <fragment
+        android:id="@+id/detailFragment"
+        android:name="com.example.logistiq.gestion.DetailFragment"
+        android:label="Detalle del Envío"
+        tools:layout="@layout/fragment_detail">
+        <argument android:name="orderCode" app:argType="string" />
+        <action
+            android:id="@+id/action_detail_to_tipoProducto"
+            app:destination="@id/tipoProductoFragment"
+            app:popUpTo="@id/tipoProductoFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+
+    <!-- 9. BIENVENIDA (PERFIL) -->
+    <fragment
+        android:id="@+id/bienvenidaFragment"
+        android:name="com.example.logistiq.operaciones.BienvenidaFragment"
+        android:label="Perfil"
+        tools:layout="@layout/fragment_bienvenida">
+        <argument android:name="Correo" app:argType="string" android:defaultValue="" />
+        <argument android:name="Proveedor" app:argType="string" android:defaultValue="" />
     </fragment>
 
 </navigation>

@@ -294,7 +294,7 @@
             android:textColor="@android:color/white"
             app:cornerRadius="28dp"
             android:backgroundTint="#D32F2F"
-            android:layout_marginTop="250dp"
+            android:layout_marginTop="230dp"
             android:elevation="6dp"
             android:stateListAnimator="@animator/button_elevation" />
 

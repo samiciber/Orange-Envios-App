@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.logistiq.R
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
-import androidx.cardview.widget.CardView
-import androidx.navigation.Navigation.findNavController
+import com.example.logistiq.gestion.TipoProductoFragmentDirections
 
 class TipoProductoFragment: Fragment() {
     private var selectedType: String? = null
@@ -26,16 +27,13 @@ class TipoProductoFragment: Fragment() {
         val cardCajaMediana = view.findViewById<CardView>(R.id.card_caja_mediana)
         val cardCajaGrande = view.findViewById<CardView>(R.id.card_caja_grande)
         val cardOtraMedida = view.findViewById<CardView>(R.id.card_otra_medida)
-
         val btnContinuar = view.findViewById<MaterialButton>(R.id.btn_continuar)
 
-        // === FUNCIÓN DE SELECCIÓN ===
+        // === SELECCIÓN ===
         val selectCard = { selectedCard: CardView, type: String ->
-            // Resetear opacidad
             listOf(cardSobre, cardCajaPequena, cardCajaMediana, cardCajaGrande, cardOtraMedida).forEach {
                 it.alpha = 0.6f
             }
-            // Resaltar seleccionada
             selectedCard.alpha = 1f
             selectedType = type
             btnContinuar.isEnabled = true
@@ -49,24 +47,19 @@ class TipoProductoFragment: Fragment() {
         cardCajaGrande.setOnClickListener { selectCard(cardCajaGrande, "caja_grande") }
         cardOtraMedida.setOnClickListener { selectCard(cardOtraMedida, "otra_medida") }
 
-        // === BOTÓN CONTINUAR ===
+        // === CONTINUAR ===
         btnContinuar.setOnClickListener {
             selectedType?.let { type ->
-                val bundle = Bundle().apply {
-                    putString("productType", type)
-                }
-                findNavController().navigate(
-                    R.id.action_tipoProducto_to_sender,
-                    bundle
-                )
+                val action = TipoProductoFragmentDirections
+                    .actionFragmentTipoProductoToFragmentSeleccionUbicacion(productType = type)
+                findNavController().navigate(action)
             }
         }
 
-        // === TOOLBAR (flecha atrás) ===
-        view.findViewById<com.google.android.material.appbar.MaterialToolbar>(R.id.toolbar)
-            .setNavigationOnClickListener {
-                findNavController().navigateUp()
-            }
+        // === TOOLBAR ===
+        view.findViewById<MaterialToolbar>(R.id.toolbar)?.setNavigationOnClickListener {
+            findNavController().navigateUp()
+        }
 
         return view
     }

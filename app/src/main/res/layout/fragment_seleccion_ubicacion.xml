@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5">
+
+    <!-- TOOLBAR -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
+            app:title="Selecciona origen y destino"
+            app:titleTextColor="#000000" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <!-- ORIGEN -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_origen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="#E0E0E0"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            android:hint="Origen">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_origen"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="text"
+                android:imeOptions="actionNext"
+                android:completionThreshold="1"
+                android:dropDownHeight="300dp"
+                android:dropDownWidth="match_parent"
+                android:dropDownVerticalOffset="4dp"
+                android:dropDownAnchor="@id/til_origen"
+                android:background="@android:color/white"
+                android:paddingStart="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- DESTINO -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_destino"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            app:boxStrokeColor="#D32F2F"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            android:hint="Destino">
+
+            <AutoCompleteTextView
+                android:id="@+id/actv_destino"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:inputType="text"
+                android:imeOptions="actionDone"
+                android:completionThreshold="1"
+                android:dropDownHeight="300dp"
+                android:dropDownWidth="match_parent"
+                android:dropDownVerticalOffset="4dp"
+                android:dropDownAnchor="@id/til_destino"
+                android:background="@android:color/white"
+                android:paddingStart="16dp"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:cursorVisible="true"
+                android:focusable="true"
+                android:focusableInTouchMode="true" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- SUGERENCIAS -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_sugerencias"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@android:color/white"
+            android:clipToPadding="false"
+            android:padding="16dp"
+            android:visibility="gone"
+            tools:listitem="@layout/item_ubicacion" />
+
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

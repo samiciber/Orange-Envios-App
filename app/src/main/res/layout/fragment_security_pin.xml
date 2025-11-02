@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="#E3F2FD"
+    android:padding="32dp"
+    android:gravity="center">
+
+    <!-- CANDADO + ESCUDO -->
+    <ImageView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/ic_lock_shield"
+        android:layout_marginBottom="32dp" />
+
+    <!-- TÍTULO -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="¡Crea tu clave de seguridad!"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="#1A237E"
+        android:layout_marginBottom="8dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Clave de 4 dígitos"
+        android:textSize="16sp"
+        android:textColor="#424242"
+        android:layout_marginBottom="32dp" />
+
+    <!-- PUNTOS DEL PIN -->
+    <TextView
+        android:id="@+id/pinDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="○ ○ ○ ○"
+        android:textSize="32sp"
+        android:letterSpacing="0.5"
+        android:layout_marginBottom="48dp" />
+
+    <!-- TECLADO -->
+    <GridLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:columnCount="3"
+        android:rowCount="4"
+        android:layout_marginBottom="48dp">
+
+        <Button android:id="@+id/btn1" android:text="1" style="@style/PinButton" />
+        <Button android:id="@+id/btn2" android:text="2" style="@style/PinButton" />
+        <Button android:id="@+id/btn3" android:text="3" style="@style/PinButton" />
+
+        <Button android:id="@+id/btn4" android:text="4" style="@style/PinButton" />
+        <Button android:id="@+id/btn5" android:text="5" style="@style/PinButton" />
+        <Button android:id="@+id/btn6" android:text="6" style="@style/PinButton" />
+
+        <Button android:id="@+id/btn7" android:text="7" style="@style/PinButton" />
+        <Button android:id="@+id/btn8" android:text="8" style="@style/PinButton" />
+        <Button android:id="@+id/btn9" android:text="9" style="@style/PinButton" />
+
+        <ImageButton
+            android:id="@+id/btnDelete"
+            android:src="@drawable/ic_delete"
+            style="@style/PinButton"
+            app:tint="#757575" />
+
+        <Button
+            android:id="@+id/btn0"
+            android:text="0"
+            style="@style/PinButton" />
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:src="@drawable/ic_backspace"
+            style="@style/PinButton"
+            app:tint="#757575" />
+    </GridLayout>
+
+    <!-- BOTÓN -->
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnCreateOrder"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:text="Crear orden de servicio"
+        android:textColor="@android:color/white"
+        app:backgroundTint="#D32F2F"
+        app:cornerRadius="12dp" />
+
+</LinearLayout>

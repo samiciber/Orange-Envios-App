@@ -15,4 +15,5 @@
     <color name="gray_switch">#BDBDBD</color>
     <color name="gray_light">#EEEEEE</color>
     <color name="nav_item_color">#000000</color>
+    <color name="rojo_borde">#FF0000</color>
 </resources>

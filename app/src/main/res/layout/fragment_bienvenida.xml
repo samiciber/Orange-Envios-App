@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".operaciones.BienvenidaFragment">
+
+    <!-- IMAGEN DE FONDO -->
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/img_1"
+        android:scaleType="centerCrop"
+        android:contentDescription="@string/app_name"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- CONTENIDO -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/boton_salir"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <TextView
+            android:id="@+id/text_bienvenido"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="BIENVENIDO(A)"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="60dp" />
+
+        <TextView
+            android:id="@+id/correo_usuario"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Correo:"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="32dp" />
+
+        <TextView
+            android:id="@+id/proveedor_servicio"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Proveedor:"
+            android:textSize="18sp"
+            android:textColor="@color/white"
+            android:layout_marginTop="16dp" />
+
+    </LinearLayout>
+
+    <!-- BOTÓN SALIR -->
+    <Button
+        android:id="@+id/boton_salir"
+        android:layout_width="180dp"
+        android:layout_height="56dp"
+        android:text="Salir"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="#D50000"
+        android:backgroundTint="@color/boton_salir_selector"
+        android:elevation="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="60dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

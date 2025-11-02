@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- res/drawable/ic_truck_pin.xml -->
+    <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="280dp"
+        android:height="180dp"
+        android:viewportWidth="280"
+        android:viewportHeight="180">
+
+        <!-- Camión -->
+        <path
+            android:fillColor="#FF6D00"
+            android:pathData="M50,100h120c5,0 10,-5 10,-10v-30c0,-5 -5,-10 -10,-10h-40l-20,-30h-60v80z"/>
+        <path
+            android:fillColor="#E65100"
+            android:pathData="M130,60h40v30h-40z"/>
+        <path
+            android:fillColor="#424242"
+            android:pathData="M70,120h20v20h-20z"/>
+        <path
+            android:fillColor="#424242"
+            android:pathData="M140,120h20v20h-20z"/>
+
+        <!-- Pin -->
+        <path
+            android:fillColor="#D32F2F"
+            android:pathData="M220,60c0,25 -30,55 -30,55s-30,-30 -30,-55c0,-16.5 13.5,-30 30,-30s30,13.5 30,30z"/>
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M190,60a10,10 0 1,1 20,0a10,10 0 1,1 -20,0z"/>
+    </vector>
+</selector>

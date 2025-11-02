@@ -2,7 +2,9 @@ package com.example.logistiq.gestion
 
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.example.logistiq.R
@@ -10,17 +12,14 @@ import com.example.logistiq.models.PersonData
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.materialswitch.MaterialSwitch
 import com.google.android.material.textfield.TextInputEditText
-import com.google.firebase.database.DataSnapshot
-import com.google.firebase.database.DatabaseError
-import com.google.firebase.database.FirebaseDatabase
-import com.google.firebase.database.ValueEventListener
 import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 
-abstract class BaseFormFragment : Fragment() {
-    protected val database: DatabaseReference = FirebaseDatabase.getInstance().reference  // ← Realtime DB Reference
+abstract class BaseFormFragment : Fragment(R.layout.fragment_remitente) {
+    protected val database: DatabaseReference = FirebaseDatabase.getInstance().reference
     private val TAG = "BaseFormFragment"
 
-    // Views (IDs unificados)
+    // Views
     protected lateinit var switchDni: MaterialSwitch
     protected lateinit var switchRuc: MaterialSwitch
     protected lateinit var switchCe: MaterialSwitch
@@ -33,22 +32,22 @@ abstract class BaseFormFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        initViews(view)
+        initViews()
         setupSwitches()
         setupClearIcons()
         setupButton()
     }
 
-    private fun initViews(view: View) {
-        switchDni = view.findViewById(R.id.switch_dni)
-        switchRuc = view.findViewById(R.id.switch_ruc)
-        switchCe = view.findViewById(R.id.switch_ce)
-        etDni = view.findViewById(R.id.et_dni)
-        etName = view.findViewById(R.id.et_name)
-        etPaterno = view.findViewById(R.id.et_paterno)
-        etMaterno = view.findViewById(R.id.et_materno)
-        etPhone = view.findViewById(R.id.et_phone)
-        btnRegister = view.findViewById(R.id.btn_register)
+    private fun initViews() {
+        switchDni = requireView().findViewById(R.id.switch_dni)
+        switchRuc = requireView().findViewById(R.id.switch_ruc)
+        switchCe = requireView().findViewById(R.id.switch_ce)
+        etDni = requireView().findViewById(R.id.et_dni)
+        etName = requireView().findViewById(R.id.et_name)
+        etPaterno = requireView().findViewById(R.id.et_paterno)
+        etMaterno = requireView().findViewById(R.id.et_materno)
+        etPhone = requireView().findViewById(R.id.et_phone)
+        btnRegister = requireView().findViewById(R.id.btn_register)
     }
 
     private fun setupSwitches() {
@@ -79,13 +78,13 @@ abstract class BaseFormFragment : Fragment() {
     }
 
     private fun setupClearIcons() {
-        // Material maneja clear_text automáticamente
+        // Material TextInputLayout maneja el ícono de borrar
     }
 
     private fun setupButton() {
         btnRegister.setOnClickListener {
             if (validateForm()) {
-                saveToRealtimeDB()  // ← FUNCIÓN CORREGIDA PARA REALTIME DB
+                saveToRealtimeDB()
             } else {
                 Toast.makeText(requireContext(), "Completa todos los campos correctamente", Toast.LENGTH_SHORT).show()
             }
@@ -106,25 +105,21 @@ abstract class BaseFormFragment : Fragment() {
             switchDni.isChecked -> "DNI"
             switchRuc.isChecked -> "RUC"
             switchCe.isChecked -> "CE"
-            else -> "DNI" // fallback
+            else -> "DNI"
         }
     }
 
-    // ← FUNCIÓN CORREGIDA: GUARDA EN REALTIME DATABASE
     open fun saveToRealtimeDB() {
-        // DETERMINAR TIPO CORRECTAMENTE (usando switches, no hint)
         val documentType = getDocumentType()
-
-        // TOMAR EL VALOR DEL CAMPO DNI/RUC/CE (el mismo campo)
         val documentValue = etDni.text.toString().trim()
 
         val personData = PersonData(
-            dni = documentValue,           // Aquí va el número (DNI, RUC, CE)
+            dni = documentValue,
             name = etName.text.toString().trim(),
             paterno = etPaterno.text.toString().trim(),
             materno = etMaterno.text.toString().trim(),
             phone = etPhone.text.toString().trim(),
-            type = documentType,           // Aquí va el TIPO: "DNI", "RUC", "CE"
+            type = documentType,
             isSender = this is SenderFragment
         )
 
@@ -146,13 +141,13 @@ abstract class BaseFormFragment : Fragment() {
             }
     }
 
-    protected fun clearForm() {
+    open fun clearForm() {
         etDni.text?.clear()
         etName.text?.clear()
         etPaterno.text?.clear()
         etMaterno.text?.clear()
         etPhone.text?.clear()
-        switchDni.isChecked = true  // Reset a DNI
+        switchDni.isChecked = true
         switchRuc.isChecked = false
         switchCe.isChecked = false
     }

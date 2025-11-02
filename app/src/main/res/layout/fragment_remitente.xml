@@ -11,18 +11,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Imagen superior (tu imagen actual) -->
+        <!-- IMAGEN SUPERIOR -->
         <ImageView
             android:id="@+id/imageView7"
             android:layout_width="0dp"
             android:layout_height="350dp"
-            android:src="@drawable/img_9"
+            android:src="@drawable/img_10"
             android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Contenedor principal (parte de abajo) -->
+        <!-- CONTENEDOR INFERIOR -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -32,7 +32,7 @@
             app:layout_constraintTop_toBottomOf="@id/imageView7"
             app:layout_constraintBottom_toBottomOf="parent">
 
-            <!-- Grupo de switches (DNI, RUC, CE) -->
+            <!-- SWITCHES -->
             <LinearLayout
                 android:id="@+id/toggle_group_recipient"
                 android:layout_width="wrap_content"
@@ -42,7 +42,6 @@
                 android:gravity="center_vertical"
                 android:layout_marginBottom="16dp">
 
-                <!-- DNI -->
                 <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_dni"
                     android:layout_width="wrap_content"
@@ -57,12 +56,8 @@
                     app:switchMinWidth="56dp"
                     app:switchPadding="8dp" />
 
-                <!-- Espacio -->
-                <View
-                    android:layout_width="24dp"
-                    android:layout_height="1dp" />
+                <View android:layout_width="24dp" android:layout_height="1dp" />
 
-                <!-- RUC (desactivado) -->
                 <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_ruc"
                     android:layout_width="wrap_content"
@@ -77,12 +72,8 @@
                     app:switchMinWidth="56dp"
                     app:switchPadding="8dp" />
 
-                <!-- Espacio -->
-                <View
-                    android:layout_width="24dp"
-                    android:layout_height="1dp" />
+                <View android:layout_width="24dp" android:layout_height="1dp" />
 
-                <!-- CE (desactivado) -->
                 <com.google.android.material.materialswitch.MaterialSwitch
                     android:id="@+id/switch_ce"
                     android:layout_width="wrap_content"
@@ -98,7 +89,7 @@
                     app:switchPadding="8dp" />
             </LinearLayout>
 
-            <!-- Campo DNI -->
+            <!-- DNI -->
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/til_dni"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -126,7 +117,7 @@
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Nombres -->
+            <!-- NOMBRES -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -150,7 +141,7 @@
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Apellidos (Paterno y Materno) -->
+            <!-- APELLIDOS -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -204,7 +195,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
 
-            <!-- Teléfono -->
+            <!-- TELÉFONO -->
             <com.google.android.material.textfield.TextInputLayout
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
@@ -228,12 +219,12 @@
                     android:padding="12dp" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Botón Registrar -->
+            <!-- BOTÓN -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_register"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Registrar remitente"
+                android:text="Registrar destinatario"
                 android:textColor="@android:color/white"
                 android:textStyle="bold"
                 android:textAllCaps="false"

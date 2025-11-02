@@ -1,18 +1,21 @@
 [versions]
+
 agp = "8.13.0"
-kotlin = "2.0.21"
-coreKtx = "1.17.0"
+kotlin = "1.9.23"
+coreKtx = "1.13.1"
 junit = "4.13.2"
-junitVersion = "1.3.0"
-espressoCore = "3.7.0"
-appcompat = "1.7.1"
-material = "1.13.0"
-activity = "1.11.0"
-constraintlayout = "2.2.1"
-generativeai = "0.9.0"
-firebaseFirestoreKtx = "26.0.2"
-navigationFragmentKtx = "2.9.5"
-navigationUiKtx = "2.9.5"
+junitVersion = "1.1.5"
+espressoCore = "3.5.1"
+appcompat = "1.6.1"
+material = "1.11.0"
+activity = "1.9.0"
+constraintlayout = "2.1.4"
+generativeai = "0.7.0"
+firebaseDatabaseKtx = "21.0.0"
+firebaseFirestoreKtx = "25.0.0"
+navigationFragmentKtx = "2.7.7"
+navigationUiKtx = "2.7.7"
+navigationSafeargs = "2.7.7"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -24,7 +27,7 @@ material = { group = "com.google.android.material", name = "material", version.r
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 generativeai = { group = "com.google.ai.client.generativeai", name = "generativeai", version.ref = "generativeai" }
-firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx"}
 firebase-firestore-ktx = { group = "com.google.firebase", name = "firebase-firestore-ktx", version.ref = "firebaseFirestoreKtx" }
 androidx-navigation-fragment-ktx = { group = "androidx.navigation", name = "navigation-fragment-ktx", version.ref = "navigationFragmentKtx" }
 androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation-ui-ktx", version.ref = "navigationUiKtx" }
@@ -32,4 +35,4 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
-
+androidx-navigation-safeargs-kotlin = { id = "androidx.navigation.safeargs.kotlin", version.ref = "navigationSafeargs" }

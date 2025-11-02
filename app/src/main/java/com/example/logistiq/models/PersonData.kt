@@ -9,24 +9,25 @@ data class PersonData(
     val materno: String = "",
     val phone: String = "",
     val type: String = "DNI",
-    val createdAt: Long = System.currentTimeMillis(),
-    val isSender: Boolean = false,
+    val isSender: Boolean = true,
     val senderId: String? = null,
-    val productType: String = "sobre",
-    val price: Int = 8
+    val productType: String = "",
+    val price: Int = 0,
+    val origen: String = "",
+    val destino: String = ""
 ) {
-    @Exclude
-    fun toMap(): Map<String, Any?> = mapOf(
+    fun toMap(): Map<String, Any> = mapOf(
         "dni" to dni,
         "name" to name,
         "paterno" to paterno,
         "materno" to materno,
         "phone" to phone,
         "type" to type,
-        "createdAt" to createdAt,
         "isSender" to isSender,
-        "senderId" to senderId,
+        "senderId" to (senderId ?: ""),
         "productType" to productType,
-        "price" to price
+        "price" to price,
+        "origen" to origen,
+        "destino" to destino
     )
 }

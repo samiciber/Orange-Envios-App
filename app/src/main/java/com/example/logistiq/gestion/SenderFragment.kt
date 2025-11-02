@@ -1,81 +1,89 @@
 package com.example.logistiq.gestion
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
 import androidx.navigation.fragment.findNavController
-import com.example.logistiq.R
 import com.example.logistiq.models.PersonData
-import com.google.firebase.database.FirebaseDatabase
 
 class SenderFragment : BaseFormFragment() {
     private var productType: String = "sobre"
-    private var price: Int = 8 // precio por defecto
+    private var price: Int = 8
+    private var origenNombre: String = ""
+    private var destinoNombre: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        productType = arguments?.getString("productType") ?: "sobre"
-
-        // CALCULAR PRECIO
-        price = when (productType) {
-            "sobre" -> 8
-            "caja_pequena" -> 15
-            "caja_mediana" -> 30
-            "caja_grande" -> 40
-            "otra_medida" -> 60
-            else -> 8
-        }
+        val args = SenderFragmentArgs.fromBundle(requireArguments())
+        productType = args.productType
+        price = args.price
+        origenNombre = args.origenNombre
+        destinoNombre = args.destinoNombre
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_remitente, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        etDni.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                val doc = s.toString().trim()
+                if (doc.length >= 8) {
+                    searchClientInFirebase(doc, getDocumentType())
+                }
+            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+        })
+
+        btnRegister.setOnClickListener { saveToRealtimeDB() }
+    }
+
+    private fun searchClientInFirebase(doc: String, type: String) {
+        database.child("clients").child(type).child(doc).get()
+            .addOnSuccessListener { snap ->
+                if (snap.exists()) {
+                    val data = snap.getValue(PersonData::class.java)
+                    data?.let {
+                        etName.setText(it.name)
+                        etPaterno.setText(it.paterno)
+                        etMaterno.setText(it.materno)
+                        etPhone.setText(it.phone)
+                    }
+                }
+            }
     }
 
     override fun saveToRealtimeDB() {
-        val documentType = getDocumentType()
-        val documentValue = etDni.text.toString().trim()
+        val doc = etDni.text.toString().trim()
+        if (doc.isEmpty()) return
 
-        val personData = PersonData(
-            dni = documentValue,
+        val person = PersonData(
+            dni = doc,
             name = etName.text.toString().trim(),
             paterno = etPaterno.text.toString().trim(),
             materno = etMaterno.text.toString().trim(),
             phone = etPhone.text.toString().trim(),
-            type = documentType,
+            type = getDocumentType(),
             isSender = true,
             productType = productType,
-            price = price  // GUARDAR PRECIO
+            price = price,
+            origen = origenNombre,
+            destino = destinoNombre
         )
+
+        database.child("clients").child(person.type).child(person.dni).setValue(person.toMap())
 
         val ref = database.child("senders").push()
         val senderKey = ref.key ?: return
 
-        ref.setValue(personData.toMap())
+        ref.setValue(person.toMap())
             .addOnSuccessListener {
-                Toast.makeText(
-                    requireContext(),
-                    "Remitente guardado - S/ $price.00",
-                    Toast.LENGTH_LONG
-                ).show()
                 clearForm()
-
-                val bundle = Bundle().apply {
-                    putString("senderKey", senderKey)
-                    putString("productType", productType)
-                    putInt("price", price) // PASAR AL DESTINATARIO
-                }
-                findNavController().navigate(
-                    R.id.action_sender_to_recipient,
-                    bundle
+                val action = SenderFragmentDirections.actionSenderToRecipient(
+                    senderKey, productType, price, origenNombre, destinoNombre
                 )
-            }
-            .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error: ${e.message}", Toast.LENGTH_SHORT).show()
+                findNavController().navigate(action)
             }
     }
 }
